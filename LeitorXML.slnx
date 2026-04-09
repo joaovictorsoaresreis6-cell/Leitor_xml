@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="LeitorXML.DLL/LeitorXML.DLL.csproj" Id="bb5b148e-898e-4453-95b5-8c702d5c84db" />
+  <Project Path="LeitorXML/LeitorXML.csproj" />
+</Solution>

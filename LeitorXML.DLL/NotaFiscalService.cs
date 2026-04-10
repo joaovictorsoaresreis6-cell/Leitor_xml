@@ -55,32 +55,6 @@ namespace LeitorXML.DLL
                 return false;
             }
         }
-        public string SalvarNoBanco(NotaFiscal nota)
-        {
-            try
-            {
-                var repository = new LeitorXML.Repositories.NotaFiscalRepository();
-                var controller = new LeitorXML.Controllers.NotaFiscalController(repository);
 
-                var notaModel = new LeitorXML.Models.NotaFiscal
-                {
-                    Numero = nota.Numero,
-                    Serie = nota.Serie,
-                    DataEmissao = nota.DataEmissao.ToString(),
-                    ValorTotal = nota.ValorTotal.ToString(),
-                    Emitente = nota.Emitente,
-                    CnpjEmitente = nota.CNPJEmitente,
-                    ChaveAcesso = nota.ChaveAcesso
-                };
-
-                var resultado = controller.Salvar(notaModel);
-
-                return resultado.Mensagem;
-            }
-            catch (Exception ex)
-            {
-                return "Erro ao salvar: " + ex.Message;
-            }
-        }
     }
 }

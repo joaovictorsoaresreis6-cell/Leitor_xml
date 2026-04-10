@@ -81,22 +81,23 @@ namespace LeitorXML
 
         private void btnSalvarBanco_Click(object sender, EventArgs e)
         {
-            NotaFiscalService service = new NotaFiscalService();
-
-            NotaFiscalDTO nota = new NotaFiscalDTO
+            var notaModel = new LeitorXML.Models.NotaFiscal
             {
                 Numero = txtNumero.Text.Trim(),
                 Serie = txtSerie.Text.Trim(),
-                DataEmissao = DateTime.TryParse(txtData.Text, out var data) ? data : DateTime.MinValue,
-                ValorTotal = decimal.TryParse(txtValor.Text, out var valor) ? valor : 0,
+                DataEmissao = txtData.Text,
+                ValorTotal = txtValor.Text,
                 Emitente = txtEmitente.Text.Trim(),
-                CNPJEmitente = txtCNPJ.Text.Trim(),
-                ChaveAcesso = txtChave.Text.Trim(),
+                CnpjEmitente = txtCNPJ.Text.Trim(),
+                ChaveAcesso = txtChave.Text.Trim()
             };
 
-            string mensagem = service.SalvarNoBanco(nota);
+            var repository = new LeitorXML.Repositories.NotaFiscalRepository();
+            var controller = new LeitorXML.Controllers.NotaFiscalController(repository);
 
-            MessageBox.Show(mensagem);
+            var resultado = controller.Salvar(notaModel);
+
+            MessageBox.Show(resultado.Mensagem);
         }
 
         private void btnValidarXML_Click(object sender, EventArgs e)
